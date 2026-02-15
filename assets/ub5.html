@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>UNBLOCKEDZONE | HACK DAY 🟩</title>
+<title>UNBLOCKEDZONE | RAINBOW EDITION</title>
 
 <!-- Font Awesome for the magnifying glass icon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -12,7 +12,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 :root {
-  --accent: #00ff00; /* Green accent */
   --bg-alpha: rgba(0,0,0,0.75);
 }
 
@@ -21,7 +20,7 @@ html, body {
   margin:0;
   background:#000;
   font-family:'Pixelify Sans', sans-serif;
-  color:var(--accent);
+  color:#fff;
   overflow:hidden;
   cursor:none;
 }
@@ -45,16 +44,36 @@ canvas#matrix {
   pointer-events:none;
 }
 
-/* Clock Outline Green */
+/* Rainbow Animation */
+@keyframes rainbow {
+  0% { color: red; text-shadow: 0 0 5px red, 0 0 10px red; }
+  16% { color: orange; text-shadow: 0 0 5px orange, 0 0 10px orange; }
+  32% { color: yellow; text-shadow: 0 0 5px yellow, 0 0 10px yellow; }
+  48% { color: green; text-shadow: 0 0 5px green, 0 0 10px green; }
+  64% { color: blue; text-shadow: 0 0 5px blue, 0 0 10px blue; }
+  80% { color: indigo; text-shadow: 0 0 5px indigo, 0 0 10px indigo; }
+  100% { color: violet; text-shadow: 0 0 5px violet, 0 0 10px violet; }
+}
+
+/* Apply rainbow to all accent elements */
+#time-display, #stats-box, #stats-box h2, #signature, #signature .caret,
+#catchphrase, #quote, .search-bar, .custom-btn.btn-squircle, #custom-cursor {
+  animation: rainbow 5s linear infinite;
+  border-color: currentColor !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  color: currentColor !important;
+}
+
+/* Clock Outline */
 #time-display {
   position:fixed;
   top:16px;
   right:20px;
   background:var(--bg-alpha);
-  border:2px solid var(--accent);
+  border:2px solid currentColor;
   border-radius:10px;
   padding:8px 12px;
-  color:var(--accent);
   pointer-events:none;
   text-align:right;
 }
@@ -66,27 +85,25 @@ canvas#matrix {
   right:16px;
   width:320px;
   background:var(--bg-alpha);
-  border:2px solid var(--accent);
+  border:2px solid currentColor;
   border-radius:12px;
   padding:14px 16px;
   pointer-events:none;
-  color:var(--accent);
 }
 #stats-box h2 {
   margin:0 0 8px 0;
   text-align:center;
-  color:var(--accent);
-  border-bottom:1px solid var(--accent);
+  border-bottom:1px solid currentColor;
   padding-bottom:4px;
 }
 
-/* Signature Outline Green */
+/* Signature Outline */
 #signature {
   position:fixed;
   top:16px;
   left:20px;
   background:var(--bg-alpha);
-  border:2px solid var(--accent);
+  border:2px solid currentColor;
   border-radius:12px;
   padding:10px 14px;
   white-space:nowrap;
@@ -96,7 +113,7 @@ canvas#matrix {
   display:inline-block;
   width:8px;
   height:16px;
-  background:var(--accent);
+  background:currentColor;
   margin-left:8px;
   vertical-align:middle;
   animation:blink 1s step-start infinite;
@@ -113,8 +130,8 @@ canvas#matrix {
   z-index:3;
   pointer-events:auto;
 }
-#catchphrase { color:var(--accent); font-size:1.6rem; margin-bottom:12px; text-transform:uppercase; }
-#quote { color:var(--accent); font-size:1.1rem; margin-top:8px; font-style:italic; }
+#catchphrase { font-size:1.6rem; margin-bottom:12px; text-transform:uppercase; }
+#quote { font-size:1.1rem; margin-top:8px; font-style:italic; }
 
 /* Search Form */
 .search-container {
@@ -137,9 +154,7 @@ canvas#matrix {
   padding:10px;
   font-family:inherit;
   font-size:1rem;
-  border:2px solid var(--accent);
-  background:transparent;
-  color:var(--accent);
+  border:2px solid currentColor;
   outline:none;
   text-align:center;
 }
@@ -147,8 +162,8 @@ canvas#matrix {
   width:50px;
   height:40px;
   border-radius:20px;
-  border:2px solid var(--accent);
-  background:var(--accent);
+  border:2px solid currentColor;
+  background:currentColor;
   color:#000;
   cursor:pointer;
   display:flex;
@@ -159,14 +174,14 @@ canvas#matrix {
 }
 .custom-btn.btn-squircle:hover { transform:scale(1.05); }
 
-/* Custom Cursor Green */
+/* Custom Cursor */
 #custom-cursor {
   position:fixed;
   width:18px;
   height:18px;
   border-radius:50%;
-  border:2px solid var(--accent);
-  background:rgba(0,255,0,0.1);
+  border:2px solid currentColor;
+  background:rgba(255,255,255,0.1);
   pointer-events:none;
   z-index:5;
 }
@@ -187,7 +202,7 @@ canvas#matrix {
   </div>
 
   <div id="stats-box">
-    <h2>🟩 SYSTEM INFO 🟩</h2>
+    <h2>🏳️‍🌈 SYSTEM INFO 🏳️‍🌈</h2>
     <div class="stat-line">Screen: <span id="screen-size"></span></div>
     <div class="stat-line">Browser: <span id="browser"></span></div>
     <div class="stat-line">Platform: <span id="platform"></span></div>
@@ -200,8 +215,8 @@ canvas#matrix {
   <div id="signature"><span id="signature-text"></span><span class="caret"></span></div>
 
   <div class="center-controls">
-    <div id="catchphrase">UNBLOCKEDZONE | HACK DAY 🟩</div>
-    <div id="quote">It is HACK DAY!</div>
+    <div id="catchphrase">CELESTIAL | RAINBOW EDITION</div>
+    <div id="quote">RAINBOW EDITION CELESTIAL!!!</div>
 
     <div class="search-container">
       <form id="uv-form" class="search-form" onsubmit="return uvSearch(this);">
@@ -227,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cw=canvas.width=window.innerWidth;
     ch=canvas.height=window.innerHeight;
     fontSize=Math.max(12,Math.floor(Math.min(cw,ch)/60));
-    letters='UNBL0CKEDZ0NE0123456789🟩';
+    letters='CELESTIAL0123456789🏳️‍🌈';
     columns=Math.floor(cw/fontSize)||1;
     drops=new Array(columns).fill(1);
     ctx.font=fontSize+'px monospace';
@@ -242,9 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
     lastTime=ts;
     ctx.fillStyle='rgba(0,0,0,0.08)';
     ctx.fillRect(0,0,cw,ch);
-    ctx.fillStyle='#00ff00';
     for(let i=0;i<drops.length;i++){
       const text=letters.charAt(Math.floor(Math.random()*letters.length));
+      const hue=(Date.now()/50 + i*10)%360;
+      ctx.fillStyle=`hsl(${hue},100%,50%)`;
       ctx.fillText(text,i*fontSize,drops[i]*fontSize);
       if(drops[i]*fontSize>ch && Math.random()>0.975) drops[i]=0;
       drops[i]++;
