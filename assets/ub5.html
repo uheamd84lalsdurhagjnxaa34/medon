@@ -44,25 +44,20 @@ canvas#matrix {
   pointer-events:none;
 }
 
-/* Rainbow Animation */
+/* Rainbow Animation for outlines only */
 @keyframes rainbow {
-  0% { color: red; text-shadow: 0 0 5px red, 0 0 10px red; }
-  16% { color: orange; text-shadow: 0 0 5px orange, 0 0 10px orange; }
-  32% { color: yellow; text-shadow: 0 0 5px yellow, 0 0 10px yellow; }
-  48% { color: green; text-shadow: 0 0 5px green, 0 0 10px green; }
-  64% { color: blue; text-shadow: 0 0 5px blue, 0 0 10px blue; }
-  80% { color: indigo; text-shadow: 0 0 5px indigo, 0 0 10px indigo; }
-  100% { color: violet; text-shadow: 0 0 5px violet, 0 0 10px violet; }
+  0% { border-color: red; box-shadow: 0 0 10px red, 0 0 20px red; }
+  16% { border-color: orange; box-shadow: 0 0 10px orange, 0 0 20px orange; }
+  32% { border-color: yellow; box-shadow: 0 0 10px yellow, 0 0 20px yellow; }
+  48% { border-color: green; box-shadow: 0 0 10px green, 0 0 20px green; }
+  64% { border-color: blue; box-shadow: 0 0 10px blue, 0 0 20px blue; }
+  80% { border-color: indigo; box-shadow: 0 0 10px indigo, 0 0 20px indigo; }
+  100% { border-color: violet; box-shadow: 0 0 10px violet, 0 0 20px violet; }
 }
 
-/* Apply rainbow to all accent elements */
-#time-display, #stats-box, #stats-box h2, #signature, #signature .caret,
-#catchphrase, #quote, .search-bar, .custom-btn.btn-squircle, #custom-cursor {
+/* Apply rainbow to top-left, top-right, and system info outlines only */
+#time-display, #stats-box, #signature {
   animation: rainbow 5s linear infinite;
-  border-color: currentColor !important;
-  background-color: transparent !important;
-  box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-  color: currentColor !important;
 }
 
 /* Clock Outline */
@@ -71,7 +66,7 @@ canvas#matrix {
   top:16px;
   right:20px;
   background:var(--bg-alpha);
-  border:2px solid currentColor;
+  border:2px solid;
   border-radius:10px;
   padding:8px 12px;
   pointer-events:none;
@@ -85,7 +80,7 @@ canvas#matrix {
   right:16px;
   width:320px;
   background:var(--bg-alpha);
-  border:2px solid currentColor;
+  border:2px solid;
   border-radius:12px;
   padding:14px 16px;
   pointer-events:none;
@@ -93,8 +88,9 @@ canvas#matrix {
 #stats-box h2 {
   margin:0 0 8px 0;
   text-align:center;
-  border-bottom:1px solid currentColor;
+  border-bottom:1px solid;
   padding-bottom:4px;
+  border-color:inherit; /* Keep consistent with outline */
 }
 
 /* Signature Outline */
@@ -103,7 +99,7 @@ canvas#matrix {
   top:16px;
   left:20px;
   background:var(--bg-alpha);
-  border:2px solid currentColor;
+  border:2px solid;
   border-radius:12px;
   padding:10px 14px;
   white-space:nowrap;
@@ -113,14 +109,14 @@ canvas#matrix {
   display:inline-block;
   width:8px;
   height:16px;
-  background:currentColor;
+  background:#00ff00; /* keep green */
   margin-left:8px;
   vertical-align:middle;
   animation:blink 1s step-start infinite;
 }
 @keyframes blink { 50% { opacity:0; } }
 
-/* Center title & quote */
+/* Center title & quote - no rainbow or glow */
 .center-controls {
   position:fixed;
   top:50%;
@@ -154,16 +150,18 @@ canvas#matrix {
   padding:10px;
   font-family:inherit;
   font-size:1rem;
-  border:2px solid currentColor;
+  border:2px solid #00ff00; /* keep green border for input */
   outline:none;
   text-align:center;
+  color:#fff;
+  background:transparent;
 }
 .custom-btn.btn-squircle {
   width:50px;
   height:40px;
   border-radius:20px;
-  border:2px solid currentColor;
-  background:currentColor;
+  border:2px solid #00ff00; /* keep green border */
+  background:#00ff00;
   color:#000;
   cursor:pointer;
   display:flex;
@@ -174,14 +172,14 @@ canvas#matrix {
 }
 .custom-btn.btn-squircle:hover { transform:scale(1.05); }
 
-/* Custom Cursor */
+/* Custom Cursor - keep green */
 #custom-cursor {
   position:fixed;
   width:18px;
   height:18px;
   border-radius:50%;
-  border:2px solid currentColor;
-  background:rgba(255,255,255,0.1);
+  border:2px solid #00ff00;
+  background:rgba(0,255,0,0.1);
   pointer-events:none;
   z-index:5;
 }
