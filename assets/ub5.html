@@ -44,7 +44,7 @@ canvas#matrix {
   pointer-events:none;
 }
 
-/* Rainbow Animation for outlines only */
+/* Rainbow Animation Keyframes */
 @keyframes rainbow {
   0% { border-color: red; box-shadow: 0 0 10px red, 0 0 20px red; }
   16% { border-color: orange; box-shadow: 0 0 10px orange, 0 0 20px orange; }
@@ -55,8 +55,8 @@ canvas#matrix {
   100% { border-color: violet; box-shadow: 0 0 10px violet, 0 0 20px violet; }
 }
 
-/* Apply rainbow to top-left, top-right, and system info outlines only */
-#time-display, #stats-box, #signature {
+/* Apply rainbow animation to outlines */
+#time-display, #stats-box, #signature, .search-bar, .custom-btn.btn-squircle {
   animation: rainbow 5s linear infinite;
 }
 
@@ -90,7 +90,7 @@ canvas#matrix {
   text-align:center;
   border-bottom:1px solid;
   padding-bottom:4px;
-  border-color:inherit; /* Keep consistent with outline */
+  border-color:inherit;
 }
 
 /* Signature Outline */
@@ -109,14 +109,14 @@ canvas#matrix {
   display:inline-block;
   width:8px;
   height:16px;
-  background:#00ff00; /* keep green */
+  background:#00ff00;
   margin-left:8px;
   vertical-align:middle;
   animation:blink 1s step-start infinite;
 }
 @keyframes blink { 50% { opacity:0; } }
 
-/* Center title & quote - no rainbow or glow */
+/* Center title & quote - no glow or rainbow */
 .center-controls {
   position:fixed;
   top:50%;
@@ -150,7 +150,7 @@ canvas#matrix {
   padding:10px;
   font-family:inherit;
   font-size:1rem;
-  border:2px solid #00ff00; /* keep green border for input */
+  border:2px solid;
   outline:none;
   text-align:center;
   color:#fff;
@@ -160,7 +160,7 @@ canvas#matrix {
   width:50px;
   height:40px;
   border-radius:20px;
-  border:2px solid #00ff00; /* keep green border */
+  border:2px solid;
   background:#00ff00;
   color:#000;
   cursor:pointer;
@@ -172,16 +172,18 @@ canvas#matrix {
 }
 .custom-btn.btn-squircle:hover { transform:scale(1.05); }
 
-/* Custom Cursor - keep green */
+/* Custom Cursor - Rainbow */
 #custom-cursor {
   position:fixed;
   width:18px;
   height:18px;
   border-radius:50%;
-  border:2px solid #00ff00;
-  background:rgba(0,255,0,0.1);
+  border:2px solid red;
+  background:rgba(255,0,0,0.1);
   pointer-events:none;
   z-index:5;
+  box-shadow:0 0 10px red,0 0 20px red;
+  transition: background 0.1s, border-color 0.1s, box-shadow 0.1s;
 }
 
 @media (max-width:420px) {
@@ -317,6 +319,23 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.style.left=e.clientX+'px';
     cursor.style.top=e.clientY+'px';
   });
+
+  // Rainbow cursor animation
+  let hue = 0;
+  function animateCursorRainbow() {
+    hue = (hue + 2) % 360;
+    const color = `hsl(${hue}, 100%, 50%)`;
+    cursor.style.borderColor = color;
+    cursor.style.background = `hsla(${hue}, 100%, 50%, 0.1)`;
+    cursor.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+    // Also update search bar and button rainbow smoothly
+    document.querySelectorAll('.search-bar, .custom-btn.btn-squircle').forEach(el=>{
+      el.style.borderColor = color;
+      if(el.tagName === 'BUTTON') el.style.backgroundColor = color;
+    });
+    requestAnimationFrame(animateCursorRainbow);
+  }
+  requestAnimationFrame(animateCursorRainbow);
 
   /* UV SEARCH FORM */
   function uvSearch(form){
