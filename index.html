@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Math Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f172a;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: #020617;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    p {
+      color: #cbd5f5;
+    }
+
+    .question {
+      font-size: 26px;
+      margin: 20px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+      min-height: 24px;
+    }
+
+    .correct {
+      color: #22c55e;
+    }
+
+    .wrong {
+      color: #ef4444;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Math Practice</h1>
+    <p>For students and teachers</p>
+
+    <div class="question" id="question">Loading...</div>
+
+    <input
+      type="number"
+      id="answer"
+      placeholder="Enter your answer"
+      autocomplete="off"
+    >
+
+    <button onclick="checkAnswer()">Check Answer</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="footer">
+      Educational use only
+    </div>
+  </div>
+
+  <script>
+    let num1, num2, operator, correctAnswer;
+
+    function generateQuestion() {
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+
+      const operators = ["+", "-", "×", "÷"];
+      operator = operators[Math.floor(Math.random() * operators.length)];
+
+      if (operator === "+") correctAnswer = num1 + num2;
+      if (operator === "-") correctAnswer = num1 - num2;
+      if (operator === "×") correctAnswer = num1 * num2;
+      if (operator === "÷") {
+        correctAnswer = num1;
+        num1 = num1 * num2;
+      }
+
+      document.getElementById("question").textContent =
+        `${num1} ${operator} ${num2}`;
+      document.getElementById("answer").value = "";
+      document.getElementById("result").textContent = "";
+    }
+
+    function checkAnswer() {
+      const userAnswer = Number(document.getElementById("answer").value);
+      const result = document.getElementById("result");
+
+      if (userAnswer === correctAnswer) {
+        result.textContent = "Correct! 🎉";
+        result.className = "result correct";
+      } else {
+        result.textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+        result.className = "result wrong";
+      }
+
+      setTimeout(generateQuestion, 1500);
+    }
+
+    generateQuestion();
+  </script>
+
+</body>
+</html>
